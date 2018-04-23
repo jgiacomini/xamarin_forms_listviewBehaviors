@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ListViewBehaviors"
+             xmlns:behavior="clr-namespace:ListViewBehaviors.Behavior"
+             x:Class="ListViewBehaviors.MainPage">
+    <ListView
+            CachingStrategy="RecycleElement"
+            RowHeight="90"
+            HasUnevenRows="True"
+            SeparatorVisibility="Default"
+            VerticalOptions="FillAndExpand"
+            ItemsSource="{Binding Path=Items,Mode=OneWay}">
+        <ListView.Behaviors>
+            <behavior:ListViewOnItemTappedBehavior 
+                        Command="{Binding Path=ItemSelectedCommand, Mode=OneWay}" />
+            <behavior:InfiniteScrollBehavior 
+                        Command="{Binding Path=LoadMoreCommand, Mode=OneWay}" />
+        </ListView.Behaviors>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Label Text="{Binding Path=Text}"/>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        <ListView.Footer>
+            <Grid Padding="4"
+                    IsVisible="{Binding IsLoadingMore}">
+                <Grid.Triggers>
+                    <Trigger TargetType="Grid" Property="IsVisible" Value="False">
+                        <Setter Property="HeightRequest" Value="0" />
+                    </Trigger>
+                </Grid.Triggers>
+                <ActivityIndicator IsRunning="true" />
+            </Grid>
+        </ListView.Footer>
+    </ListView>
+</ContentPage>
