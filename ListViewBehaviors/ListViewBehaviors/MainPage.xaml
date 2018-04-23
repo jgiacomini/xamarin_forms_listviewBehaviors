@@ -15,6 +15,7 @@
             <behavior:ListViewOnItemTappedBehavior 
                         Command="{Binding Path=ItemSelectedCommand, Mode=OneWay}" />
             <behavior:InfiniteScrollBehavior 
+                        NumberOfItemsBeforeLoadMore="10"
                         Command="{Binding Path=LoadMoreCommand, Mode=OneWay}" />
         </ListView.Behaviors>
         <ListView.ItemTemplate>
