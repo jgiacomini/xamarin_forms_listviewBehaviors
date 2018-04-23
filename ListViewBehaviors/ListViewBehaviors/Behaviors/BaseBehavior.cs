@@ -11,8 +11,11 @@ namespace ListViewBehaviors.Behavior
         protected override void OnAttachedTo(T bindable)
         {
             base.OnAttachedTo(bindable);
+
+            // Lors de la construction on définit la propriété AssociatedObject
             AssociatedObject = bindable;
 
+            //Si le contexte est != NULL on initiliase le contexte de du Behavior avec celui de l'objet courant
             if (bindable.BindingContext != null)
             {
                 BindingContext = bindable.BindingContext;
@@ -24,7 +27,10 @@ namespace ListViewBehaviors.Behavior
         protected override void OnDetachingFrom(T bindable)
         {
             base.OnDetachingFrom(bindable);
+            //On se désabonne 
             bindable.BindingContextChanged -= OnBindingContextChanged;
+
+            // Lors de la construction on définit la propriété AssociatedObject
             AssociatedObject = null;
         }
 

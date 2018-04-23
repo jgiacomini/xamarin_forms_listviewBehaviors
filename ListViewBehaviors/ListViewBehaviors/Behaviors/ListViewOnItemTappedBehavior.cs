@@ -8,12 +8,14 @@ namespace ListViewBehaviors.Behavior
         protected override void OnAttachedTo(ListView bindable)
         {
             base.OnAttachedTo(bindable);
+            // Abonnement à ItemTapped
             bindable.ItemTapped += Bindable_ItemTapped;
         }
 
         protected override void OnDetachingFrom(ListView bindable)
         {
             base.OnDetachingFrom(bindable);
+            // Désabonnement à ItemTapped (très important sans ça vous risquez de créer des fuites mémoire).
             bindable.ItemTapped -= Bindable_ItemTapped;
         }
 
